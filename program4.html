@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html ng-app="mathApp">
+<head>
+    <title>4. Math Operations</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <a href="index.html" class="back-link">← Back to Dashboard</a>
+    <div ng-controller="mathCtrl" class="task-box">
+        <h2>Math Operations</h2>
+        Number: <input type="number" ng-model="num">
+        <br>
+        <button ng-click="calcFact()">Factorial</button>
+        <button ng-click="calcSq()">Square</button>
+        <p ng-show="fact !== undefined"><strong>Factorial:</strong> {{ fact }}</p>
+        <p ng-show="sq !== undefined"><strong>Square:</strong> {{ sq }}</p>
+    </div>
+    <script>
+        angular.module('mathApp', []).controller('mathCtrl', function ($scope) {
+            $scope.calcSq = function () { $scope.sq = $scope.num * $scope.num; };
+            $scope.calcFact = function () {
+                if ($scope.num < 0) { $scope.fact = 'Invalid (Negative)'; return; }
+                $scope.fact = factorial($scope.num);
+            };
+            function factorial(n) { return (n === 0 || n === 1) ? 1 : n * factorial(n - 1); }
+        });
+    </script>
+</body>
+</html>

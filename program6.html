@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html ng-app="todoApp">
+<head>
+    <title>6. To-Do List</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <a href="index.html" class="back-link">← Back to Dashboard</a>
+    <div ng-controller="todoCtrl" class="task-box">
+        <h2>Todo List</h2>
+        <input type="text" ng-model="newTask" placeholder="Enter new task">
+        <button ng-click="add()">Add Task</button>
+        <table>
+            <tr><th>Task</th><th style="width: 150px;">Action</th></tr>
+            <tr ng-repeat="task in tasks track by $index">
+                <td>{{ task }}</td>
+                <td>
+                    <button ng-click="edit($index)">Edit</button>
+                    <button class="btn-danger" ng-click="delete($index)">Delete</button>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <script>
+        angular.module('todoApp', []).controller('todoCtrl', function ($scope) {
+            $scope.tasks = ['Read Book', 'Write Code'];
+            $scope.add = function () {
+                if($scope.newTask) { $scope.tasks.push($scope.newTask); $scope.newTask = ''; }
+            };
+            $scope.edit = function (index) {
+                var update = prompt('Edit task:', $scope.tasks[index]);
+                if (update) { $scope.tasks[index] = update; }
+            };
+            $scope.delete = function (index) { $scope.tasks.splice(index, 1); };
+        });
+    </script>
+</body>
+</html>

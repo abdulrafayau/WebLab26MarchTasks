@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html ng-app="crudApp">
+<head>
+    <title>7. CRUD Users</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <a href="index.html" class="back-link">← Back to Dashboard</a>
+    <div ng-controller="crudCtrl" class="task-box">
+        <h2>User Management</h2>
+        Name: <input type="text" ng-model="name"><br>
+        Age: <input type="number" ng-model="age"><br>
+        <button ng-click="add()">Add User</button>
+        <table>
+            <tr><th>Name</th><th>Age</th><th style="width: 150px;">Action</th></tr>
+            <tr ng-repeat="user in users">
+                <td>{{ user.name }}</td><td>{{ user.age }}</td>
+                <td>
+                    <button ng-click="edit(user)">Edit</button>
+                    <button class="btn-danger" ng-click="delete(user)">Delete</button>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <script>
+        angular.module('crudApp', []).controller('crudCtrl', function ($scope) {
+            $scope.users = [{name: 'Ram', age: 25}, {name: 'Sam', age: 30}];
+            $scope.add = function () {
+                if($scope.name && $scope.age) { $scope.users.push({name: $scope.name, age: $scope.age}); $scope.name=''; $scope.age=''; }
+            };
+            $scope.edit = function (user) {
+                var i = $scope.users.indexOf(user);
+                var n = prompt('Updated name:', user.name);
+                var a = prompt('Updated age:', user.age);
+                if (n && a) { $scope.users[i] = {name: n, age: parseInt(a)}; }
+            };
+            $scope.delete = function (user) { $scope.users.splice($scope.users.indexOf(user), 1); };
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html ng-app="dateApp">
+<head>
+    <title>12. Date Filter</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <a href="index.html" class="back-link">← Back to Dashboard</a>
+    <div ng-controller="dateCtrl" class="task-box">
+        <h2>Date Display</h2>
+        <p><strong>Default Format:</strong> <br> {{ currentDate | date }}</p>
+        <p><strong>Custom Format (yyyy-MM-dd):</strong> <br> {{ currentDate | date:'yyyy-MM-dd' }}</p>
+        <p><strong>Short Date:</strong> <br> {{ currentDate | date:'shortDate' }}</p>
+        <p><strong>Full Date:</strong> <br> {{ currentDate | date:'fullDate' }}</p>
+    </div>
+    <script>
+        angular.module('dateApp', []).controller('dateCtrl', function ($scope) {
+            $scope.currentDate = new Date();
+        });
+    </script>
+</body>
+</html>

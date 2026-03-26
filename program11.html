@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html ng-app="filterApp">
+<head>
+    <title>11. Uppercase Filter</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <a href="index.html" class="back-link">← Back to Dashboard</a>
+    <div ng-controller="filterCtrl" class="task-box">
+        <h2>Student Names Filter</h2>
+        <h3>Original Names:</h3>
+        <ul><li ng-repeat="name in names">{{ name }}</li></ul>
+        
+        <h3>Names in Uppercase:</h3>
+        <ul><li ng-repeat="name in names">{{ name | uppercase }}</li></ul>
+    </div>
+    <script>
+        angular.module('filterApp', []).controller('filterCtrl', function ($scope) {
+            $scope.names = ['Raj', 'Ram', 'Sam'];
+        });
+    </script>
+</body>
+</html>
